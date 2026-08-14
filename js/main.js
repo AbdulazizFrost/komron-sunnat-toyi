@@ -206,80 +206,36 @@ function initIntroScreen() {
    -------------------------------------------------------------------------- */
 function initAmbientAudio() {
     const audioBtn = document.getElementById('btn-audio-toggle');
-    if (!audioBtn) return;
+    const audio = document.getElementById('wedding-music');
 
-    let isAudioPlaying = false;
-    let audioContext = null;
-    let synthGain = null;
-    let synthInterval = null;
+    if (!audioBtn || !audio) return;
 
-    const notes = [220, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 523.25];
+    let isPlaying = false;
+    audio.volume = 0.30;
 
-    function initWebAudio() {
+    window.playAmbientAudio = async function () {
         try {
-            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContextClass) return;
-
-            audioContext = new AudioContextClass();
-            synthGain = audioContext.createGain();
-            synthGain.gain.setValueAtTime(0.08, audioContext.currentTime);
-            synthGain.connect(audioContext.destination);
-
-            function playChime() {
-                if (!isAudioPlaying || !audioContext || audioContext.state !== 'running') return;
-
-                const osc = audioContext.createOscillator();
-                const noteGain = audioContext.createGain();
-
-                osc.type = Math.random() > 0.4 ? 'sine' : 'triangle';
-                const note = notes[Math.floor(Math.random() * notes.length)];
-                osc.frequency.setValueAtTime(note, audioContext.currentTime);
-
-                noteGain.gain.setValueAtTime(0, audioContext.currentTime);
-                noteGain.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.3);
-                noteGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 2.8);
-
-                osc.connect(noteGain);
-                noteGain.connect(synthGain);
-
-                osc.start();
-                osc.stop(audioContext.currentTime + 3.0);
-            }
-
-            synthInterval = setInterval(playChime, 1800);
-            playChime();
-        } catch (e) {
-            console.log('Web Audio not supported');
+            await audio.play();
+            isPlaying = true;
+            audioBtn.classList.add('is-playing');
+            audioBtn.setAttribute('aria-pressed', 'true');
+        } catch (error) {
+            console.warn('Music could not start:', error);
         }
-    }
-
-    window.playAmbientAudio = function() {
-        if (!audioContext) {
-            initWebAudio();
-        } else if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-        isAudioPlaying = true;
-        audioBtn.classList.add('is-playing');
-        audioBtn.setAttribute('aria-pressed', 'true');
     };
 
-    window.pauseAmbientAudio = function() {
-        if (audioContext && audioContext.state === 'running') {
-            audioContext.suspend();
-        }
-        isAudioPlaying = false;
+    window.pauseAmbientAudio = function () {
+        audio.pause();
+        isPlaying = false;
         audioBtn.classList.remove('is-playing');
         audioBtn.setAttribute('aria-pressed', 'false');
     };
 
-    audioBtn.addEventListener('click', () => {
-        if (isAudioPlaying) {
+    audioBtn.addEventListener('click', async () => {
+        if (isPlaying) {
             window.pauseAmbientAudio();
-            showToast("Musiqa to'xtatildi 🔇");
         } else {
-            window.playAmbientAudio();
-            showToast("Musiqa yoqildi 🎵");
+            await window.playAmbientAudio();
         }
     });
 }
