@@ -10,10 +10,11 @@
     <meta property="og:description" content="Assalomu alaykum, hurmatli mehmonlar! 🌿 Sizni oilamiz uchun quvonchli va unutilmas kun — Sunnat to‘yi munosabati bilan o‘tkazilayotgan tantanamizga chin dildan taklif qilamiz. Komron & Sunnat. 8-sentabr 2026-yil, Gurtepa, Oqsaroy to‘yxonasi. Sizning tashrifingiz quvonchimizga quvonch, bayramimizga yanada fayz bag‘ishlaydi.">
     <meta property="og:type" content="website">
     
-    <!-- Google Fonts: Luxury Editorial Serif, Regal Headings & Arabic Calligraphy -->
+    <!-- Google Fonts: non-render-blocking async load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
     
     <link rel="preload" as="image" href="assets/images/komron_photo.webp" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/arch_frame_overlay.webp" fetchpriority="high">
@@ -660,8 +661,8 @@
     <div id="global-toast" class="toast-msg"></div>
 
     <!-- Main JavaScript Logic -->
-    <script src="js/main.js"></script>
-    <audio id="wedding-music" loop preload="auto">
+    <script src="js/main.js" defer></script>
+    <audio id="wedding-music" loop preload="none">
         <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
     </audio>
 </body>
