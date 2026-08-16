@@ -20,8 +20,86 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Watermark Style -->
+    <style>
+        .watermark-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .watermark-overlay::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 120px,
+                rgba(0,0,0,0.03) 120px,
+                rgba(0,0,0,0.03) 121px
+            );
+        }
+        .watermark-text-grid {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0;
+            transform: rotate(-35deg) scale(1.8);
+            transform-origin: center center;
+        }
+        .watermark-item {
+            flex: 0 0 340px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .watermark-item span {
+            display: block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: rgba(0, 0, 0, 0.13);
+            text-transform: uppercase;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .watermark-item span:last-child {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.09);
+            letter-spacing: 0.12em;
+        }
+    </style>
 </head>
 <body class="is-intro-active">
+
+    <!-- ========== WATERMARK: DEMO / UNPAID ========== -->
+    <div class="watermark-overlay" aria-hidden="true">
+        <div class="watermark-text-grid" id="wm-grid"></div>
+    </div>
+    <script>
+        (function(){
+            var grid = document.getElementById('wm-grid');
+            var count = 80;
+            for(var i = 0; i < count; i++){
+                var el = document.createElement('div');
+                el.className = 'watermark-item';
+                el.innerHTML = '<span>NAMUNA • TO\'LOV KUTILMOQDA</span><span>Demo versiya — Toʻlov amalga oshirilmagan</span>';
+                grid.appendChild(el);
+            }
+        })();
+    </script>
 
     <!-- ==========================================================================
          GLOBAL MATERIAL & LIGHTING
@@ -377,6 +455,8 @@
                 <div class="map-container">
                     <iframe 
                         src="https://maps.google.com/maps?q=Oq+saroy+to%27yxonasi%2C+Gurumsaray%2C+Namangan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        width="600"
+                        height="400"
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade"

@@ -254,6 +254,8 @@ function initCountdown() {
     // Target Event Date: September 8, 2026 07:00:00 (Tashkent Time UTC+5)
     const targetDate = new Date('2026-09-08T07:00:00+05:00').getTime();
 
+    let countdownInterval;
+
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetDate - now;
@@ -263,6 +265,7 @@ function initCountdown() {
             hoursEl.textContent = '00';
             minutesEl.textContent = '00';
             secondsEl.textContent = '00';
+            clearInterval(countdownInterval);
             return;
         }
 
@@ -278,7 +281,7 @@ function initCountdown() {
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    countdownInterval = setInterval(updateCountdown, 1000);
 }
 
 /* --------------------------------------------------------------------------
@@ -301,73 +304,6 @@ function initCalendarActions() {
         
         window.open(googleCalUrl, '_blank');
         showToast("Tadbir taqvimingizga qo‘shilmoqda... 📅");
-    });
-}
-
-/* --------------------------------------------------------------------------
-   06. GALLERY LIGHTBOX MODAL
-   -------------------------------------------------------------------------- */
-function initGalleryLightbox() {
-    const galleryCards = document.querySelectorAll('.gallery-card');
-    const lightboxModal = document.getElementById('lightbox-modal');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const lightboxClose = document.getElementById('lightbox-close');
-
-    if (!galleryCards.length || !lightboxModal || !lightboxImg || !lightboxCaption) return;
-
-    galleryCards.forEach(card => {
-        const openLightbox = () => {
-            const img = card.querySelector('.gallery-img');
-            const title = card.querySelector('.gallery-item-title');
-            const sub = card.querySelector('.gallery-item-sub');
-
-            if (img) {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = title ? title.textContent : 'Kamron to‘yi xotirasi';
-                lightboxCaption.textContent = title ? `${title.textContent} • ${sub ? sub.textContent : ''}` : '';
-                lightboxModal.removeAttribute('hidden');
-                requestAnimationFrame(() => {
-                    lightboxModal.classList.add('active');
-                });
-                document.body.style.overflow = 'hidden';
-            }
-        };
-
-        card.addEventListener('click', openLightbox);
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                openLightbox();
-            }
-        });
-    });
-
-    const closeLightbox = () => {
-        lightboxModal.classList.remove('active');
-        document.body.style.overflow = '';
-        setTimeout(() => {
-            if (!lightboxModal.classList.contains('active')) {
-                lightboxModal.setAttribute('hidden', '');
-                lightboxImg.src = '';
-            }
-        }, 400);
-    };
-
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', closeLightbox);
-    }
-
-    lightboxModal.addEventListener('click', (e) => {
-        if (e.target === lightboxModal || e.target.classList.contains('lightbox-backdrop')) {
-            closeLightbox();
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !lightboxModal.hasAttribute('hidden')) {
-            closeLightbox();
-        }
     });
 }
 
