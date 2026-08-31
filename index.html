@@ -292,52 +292,89 @@
 
         /* ══════════════════════════════════════════════════════════
            ЗАЩИТА ОТ ЗАПИСИ ЭКРАНА
-           Методы:
-           1. visibilitychange — при скрытии вкладки блокируем
-           2. window blur — окно потеряло фокус → блокируем
-           3. Мерцающий оверлей — делает видео нечитаемым
         ══════════════════════════════════════════════════════════ */
 
-        /* Мерцающий оверлей (портит качество записи) */
-        var flickerEl = document.createElement('div');
-        flickerEl.id = 'flicker-shield';
-        flickerEl.style.cssText = [
-            'position:fixed', 'inset:0', 'z-index:99997',
-            'pointer-events:none', 'opacity:0',
-            'background:rgba(255,255,255,0.07)',
-            'transition:opacity 0.05s'
+        /* Создаём два слоя мерцания */
+        var flickerLight = document.createElement('div');
+        flickerLight.style.cssText = 'position:fixed;inset:0;z-index:99997;pointer-events:none;opacity:0;background:#fff;will-change:opacity';
+        document.body.appendChild(flickerLight);
+
+        var flickerDark = document.createElement('div');
+        flickerDark.style.cssText = 'position:fixed;inset:0;z-index:99996;pointer-events:none;opacity:0;background:#000;will-change:opacity';
+        document.body.appendChild(flickerDark);
+
+        /* Надпись "Запись запрещена" */
+        var recWarning = document.createElement('div');
+        recWarning.textContent = '⛔ YOZIB OLISH TAQIQLANGAN ⛔';
+        recWarning.style.cssText = [
+            'position:fixed', 'top:50%', 'left:50%',
+            'transform:translate(-50%,-50%)',
+            'z-index:99998', 'pointer-events:none',
+            'font-family:sans-serif', 'font-size:22px',
+            'font-weight:900', 'letter-spacing:0.1em',
+            'color:#fff', 'text-shadow:0 0 20px #000',
+            'opacity:0', 'text-align:center',
+            'white-space:nowrap'
         ].join(';');
-        document.body.appendChild(flickerEl);
+        document.body.appendChild(recWarning);
 
         var flickerInterval = null;
-        function startFlicker() {
-            if (flickerInterval) return;
-            flickerInterval = setInterval(function(){
-                flickerEl.style.opacity = (Math.random() > 0.5) ? '1' : '0';
-            }, 80);
-        }
-        function stopFlicker() {
-            clearInterval(flickerInterval);
-            flickerInterval = null;
-            flickerEl.style.opacity = '0';
+        var isAggressive = false;
+
+        /* Фоновый мерцатель — всегда включён, но едва заметен (портит видеозапись) */
+        var bgFlickerFrame = 0;
+        (function bgFlicker() {
+            bgFlickerFrame++;
+            /* Меняем каждые 2 кадра (~30fps) — невидимо человеку, видно записи */
+            flickerLight.style.opacity = (bgFlickerFrame % 2 === 0) ? '0.025' : '0';
+            requestAnimationFrame(bgFlicker);
+        })();
+
+        /* Агрессивный мерцатель — при потере фокуса/скрытии */
+        function startAggressiveFlicker() {
+            if (isAggressive) return;
+            isAggressive = true;
+            recWarning.style.opacity = '1';
+
+            var toggle = true;
+            flickerInterval = setInterval(function() {
+                if (toggle) {
+                    flickerLight.style.opacity = (Math.random() * 0.4 + 0.3).toFixed(2); /* 0.3–0.7 */
+                    flickerDark.style.opacity  = '0';
+                } else {
+                    flickerDark.style.opacity  = (Math.random() * 0.4 + 0.3).toFixed(2);
+                    flickerLight.style.opacity = '0';
+                }
+                toggle = !toggle;
+            }, 60); /* 60мс = ~16fps — в видео видно, глазу незаметно */
         }
 
-        /* Скрытие вкладки (Alt+Tab, Screen recorder start) */
-        document.addEventListener('visibilitychange', function(){
+        function stopAggressiveFlicker() {
+            if (!isAggressive) return;
+            isAggressive = false;
+            clearInterval(flickerInterval);
+            flickerInterval = null;
+            flickerLight.style.opacity = '0';
+            flickerDark.style.opacity  = '0';
+            recWarning.style.opacity   = '0';
+        }
+
+        /* Триггеры */
+        document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 showLock();
-                startFlicker();
+                startAggressiveFlicker();
             } else {
-                stopFlicker();
+                stopAggressiveFlicker();
             }
         });
 
-        /* Потеря фокуса окна */
-        window.addEventListener('blur', function(){
-            showLock();
-            startFlicker();
-        });
-        window.addEventListener('focus', stopFlicker);
+        window.addEventListener('blur',  function() { showLock(); startAggressiveFlicker(); });
+        window.addEventListener('focus', stopAggressiveFlicker);
+
+        /* Курсор вышел за пределы окна */
+        document.addEventListener('mouseleave', function() { startAggressiveFlicker(); });
+        document.addEventListener('mouseenter',  stopAggressiveFlicker);
 
         /* ── Запуск после полной загрузки DOM ── */
         if (document.readyState === 'loading') {
