@@ -67,12 +67,12 @@
             color: rgba(0,0,0,0.08);
         }
 
-        /* Content blur */
-        .site-blur-wrapper {
-            filter: blur(4px);
-            pointer-events: none;
-            user-select: none;
-            transition: filter 0.3s;
+        /* Content blur — через класс на body */
+        body.site-is-locked > *:not(#pay-lock):not(.watermark-overlay):not(#flicker-shield):not(script) {
+            filter: blur(6px);
+            pointer-events: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
         }
 
         /* Payment lock modal */
@@ -219,93 +219,122 @@
     <!-- ========== PAYMENT PROTECTION SCRIPT ========== -->
     <script>
     (function() {
-        var lockEl = document.getElementById('pay-lock');
-        var peekBtn = document.getElementById('pay-peek-btn');
+        var lockEl    = document.getElementById('pay-lock');
+        var peekBtn   = document.getElementById('pay-peek-btn');
         var peekTimer = null;
-        var PEEK_DURATION = 30000; // 30 секунд видно
-        var RELOCK_INTERVAL = 60000; // каждые 60 секунд возвращается
+        var PEEK_MS   = 30000;   // 30 сек — смотреть
+        var RELOCK_MS = 60000;   // 60 сек — автоблок
 
-        // Blur all site content
-        function blurSite() {
-            var body = document.body;
-            var nodes = body.childNodes;
-            for (var i = 0; i < nodes.length; i++) {
-                var n = nodes[i];
-                if (n.nodeType === 1 &&
-                    n.id !== 'pay-lock' &&
-                    !n.classList.contains('watermark-overlay') &&
-                    !n.classList.contains('pay-lock-backdrop')) {
-                    n.classList.add('site-blur-wrapper');
-                }
-            }
-        }
-
-        function unblurSite() {
-            var blurred = document.querySelectorAll('.site-blur-wrapper');
-            blurred.forEach(function(el) { el.classList.remove('site-blur-wrapper'); });
-        }
-
-        // Show lock
+        /* ── BLUR через CSS-класс на body (работает на всех детях) ── */
         function showLock() {
             clearTimeout(peekTimer);
-            blurSite();
+            document.body.classList.add('site-is-locked');
             lockEl.style.display = 'flex';
         }
-
-        // Peek — временно скрыть на 30 секунд
-        function peek() {
+        function hideLock() {
+            document.body.classList.remove('site-is-locked');
             lockEl.style.display = 'none';
-            unblurSite();
+        }
+        function peek() {
+            hideLock();
             clearTimeout(peekTimer);
-            peekTimer = setTimeout(function() {
-                showLock();
-            }, PEEK_DURATION);
+            peekTimer = setTimeout(showLock, PEEK_MS);
         }
 
-        // Disable right-click
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        /* ── Блок правой кнопки ── */
+        document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
-        // Disable F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J
-        document.addEventListener('keydown', function(e) {
+        /* ── Блок горячих клавиш DevTools ── */
+        document.addEventListener('keydown', function(e){
             if (e.key === 'F12' ||
-                (e.ctrlKey && e.key === 'u') ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
-                e.preventDefault();
-            }
-        });
-
-        // Disable text selection
-        document.addEventListener('selectstart', function(e) {
-            if (!e.target.closest('#pay-lock')) e.preventDefault();
-        });
-
-        // Disable drag
-        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-
-        // Block all clicks outside modal when locked
-        document.addEventListener('click', function(e) {
-            if (lockEl.style.display !== 'none' && !e.target.closest('#pay-lock')) {
+                (e.ctrlKey && e.shiftKey && 'IJC'.includes(e.key)) ||
+                (e.ctrlKey && e.key.toLowerCase() === 'u')) {
                 e.preventDefault();
                 e.stopPropagation();
-                // Shake the card
-                var card = lockEl.querySelector('.pay-lock-card');
-                card.style.animation = 'none';
-                card.offsetHeight;
-                card.style.animation = 'lockCardIn 0.3s ease both';
             }
         }, true);
 
-        peekBtn.addEventListener('click', function() { peek(); });
+        /* ── Блок выделения текста и перетаскивания ── */
+        document.addEventListener('selectstart', function(e){
+            if (!e.target.closest('#pay-lock')) e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
-        // Auto-relock every 60 seconds even if peeking
-        setInterval(function() {
+        /* ── Блок кликов вне модала когда заблокировано ── */
+        document.addEventListener('click', function(e){
+            if (lockEl.style.display !== 'none' && !e.target.closest('#pay-lock')) {
+                e.preventDefault();
+                e.stopPropagation();
+                var card = lockEl.querySelector('.pay-lock-card');
+                card.style.animation = 'none';
+                void card.offsetHeight;
+                card.style.animation = 'lockCardIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both';
+            }
+        }, true);
+
+        peekBtn.addEventListener('click', peek);
+
+        /* ── Авто-блок каждые 60 сек ── */
+        setInterval(showLock, RELOCK_MS);
+
+        /* ══════════════════════════════════════════════════════════
+           ЗАЩИТА ОТ ЗАПИСИ ЭКРАНА
+           Методы:
+           1. visibilitychange — при скрытии вкладки блокируем
+           2. window blur — окно потеряло фокус → блокируем
+           3. Мерцающий оверлей — делает видео нечитаемым
+        ══════════════════════════════════════════════════════════ */
+
+        /* Мерцающий оверлей (портит качество записи) */
+        var flickerEl = document.createElement('div');
+        flickerEl.id = 'flicker-shield';
+        flickerEl.style.cssText = [
+            'position:fixed', 'inset:0', 'z-index:99997',
+            'pointer-events:none', 'opacity:0',
+            'background:rgba(255,255,255,0.07)',
+            'transition:opacity 0.05s'
+        ].join(';');
+        document.body.appendChild(flickerEl);
+
+        var flickerInterval = null;
+        function startFlicker() {
+            if (flickerInterval) return;
+            flickerInterval = setInterval(function(){
+                flickerEl.style.opacity = (Math.random() > 0.5) ? '1' : '0';
+            }, 80);
+        }
+        function stopFlicker() {
+            clearInterval(flickerInterval);
+            flickerInterval = null;
+            flickerEl.style.opacity = '0';
+        }
+
+        /* Скрытие вкладки (Alt+Tab, Screen recorder start) */
+        document.addEventListener('visibilitychange', function(){
+            if (document.hidden) {
+                showLock();
+                startFlicker();
+            } else {
+                stopFlicker();
+            }
+        });
+
+        /* Потеря фокуса окна */
+        window.addEventListener('blur', function(){
             showLock();
-        }, RELOCK_INTERVAL);
+            startFlicker();
+        });
+        window.addEventListener('focus', stopFlicker);
 
-        // Initial lock
-        showLock();
+        /* ── Запуск после полной загрузки DOM ── */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', showLock);
+        } else {
+            showLock();
+        }
     })();
     </script>
+
 
     <!-- ==========================================================================
          GLOBAL MATERIAL & LIGHTING
