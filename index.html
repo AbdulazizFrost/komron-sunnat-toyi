@@ -67,6 +67,14 @@
             color: rgba(0,0,0,0.08);
         }
 
+        /* Запрет выделения текста — всегда, даже в peek-режиме */
+        body > *:not(#pay-lock) {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
         /* Content blur — через класс на body */
         body.site-is-locked > *:not(#pay-lock):not(.watermark-overlay):not(#flicker-shield):not(script) {
             filter: blur(6px);
@@ -259,6 +267,11 @@
             if (!e.target.closest('#pay-lock')) e.preventDefault();
         });
         document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+        /* ── Блок копирования текста (работает даже в peek-режиме) ── */
+        document.addEventListener('copy',  function(e){ e.preventDefault(); });
+        document.addEventListener('cut',   function(e){ e.preventDefault(); });
+        document.addEventListener('paste', function(e){ e.preventDefault(); });
 
         /* ── Блок кликов вне модала когда заблокировано ── */
         document.addEventListener('click', function(e){
