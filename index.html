@@ -304,22 +304,6 @@
         fDark.style.cssText = 'position:fixed;inset:0;z-index:199996;pointer-events:none;opacity:0;background:#000;will-change:opacity';
         document.body.appendChild(fDark);
 
-        /* Слой 3: Надпись — ВСЕГДА видна (слабо человеку, чётко в записи) */
-        var fWarn = document.createElement('div');
-        fWarn.textContent = '⛔ YOZIB OLISH TAQIQLANGAN ⛔';
-        fWarn.style.cssText = [
-            'position:fixed', 'top:50%', 'left:50%',
-            'transform:translate(-50%,-50%) rotate(-30deg)',
-            'z-index:199999', 'pointer-events:none',
-            'font-family:sans-serif', 'font-size:clamp(14px,4vw,24px)',
-            'font-weight:900', 'letter-spacing:0.08em',
-            'color:#ff0000', 'text-shadow:0 0 8px rgba(0,0,0,0.8)',
-            'opacity:0.12',  /* слабо видно человеку */
-            'text-align:center', 'white-space:nowrap',
-            'will-change:opacity'
-        ].join(';');
-        document.body.appendChild(fWarn);
-
         /* rAF-цикл — работает на всех устройствах без событий */
         var rafFrame = 0;
         var isLockedState = true;
@@ -332,14 +316,11 @@
                 var t = rafFrame % 4;
                 fLight.style.opacity = (t === 0) ? (Math.random() * 0.5 + 0.3).toFixed(2) : '0';
                 fDark.style.opacity  = (t === 2) ? (Math.random() * 0.5 + 0.3).toFixed(2) : '0';
-                fWarn.style.opacity  = (t % 2 === 0) ? '0.9' : '0.1';
             } else {
-                /* Тихий режим просмотра — мерцание каждые 6 кадров (~10fps) */
+                /* Тихий режим просмотра — лёгкое мерцание каждые 6 кадров */
                 var show = (rafFrame % 6 < 1);
                 fLight.style.opacity = show ? '0.04' : '0';
                 fDark.style.opacity  = '0';
-                /* Надпись всегда слабо мерцает — в записи видна чётко */
-                fWarn.style.opacity  = (rafFrame % 6 < 3) ? '0.18' : '0.06';
             }
 
             requestAnimationFrame(protectionLoop);
