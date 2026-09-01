@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Komron — Sunnat To‘yi | 8-Sentyabr 2026</title>
+    <meta name="description" content="Assalomu alaykum, hurmatli mehmonlar! 🌿 Sizni oilamiz uchun quvonchli va unutilmas kun — Sunnat to‘yi munosabati bilan o‘tkazilayotgan tantanamizga chin dildan taklif qilamiz. Komron & Sunnat. 8-sentabr 2026-yil, Gurtepa, Oqsaroy to‘yxonasi. Sizning tashrifingiz quvonchimizga quvonch, bayramimizga yanada fayz bag‘ishlaydi.">
+    <meta name="theme-color" content="#FAF9F6">
+    <meta property="og:title" content="Komron — Sunnat To‘yi Taklifnomasi">
+    <meta property="og:description" content="Assalomu alaykum, hurmatli mehmonlar! 🌿 Sizni oilamiz uchun quvonchli va unutilmas kun — Sunnat to‘yi munosabati bilan o‘tkazilayotgan tantanamizga chin dildan taklif qilamiz. Komron & Sunnat. 8-sentabr 2026-yil, Gurtepa, Oqsaroy to‘yxonasi. Sizning tashrifingiz quvonchimizga quvonch, bayramimizga yanada fayz bag‘ishlaydi.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts: non-render-blocking async load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <link rel="preload" as="image" href="assets/images/komron_photo.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/arch_frame_overlay.webp" fetchpriority="high">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- ========== PAYMENT PROTECTION STYLES ========== -->
+    <style>
+        /* Watermark */
+        .watermark-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .watermark-text-grid {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0;
+            transform: rotate(-35deg) scale(1.8);
+            transform-origin: center center;
+        }
+        .watermark-item {
+            flex: 0 0 340px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .watermark-item span {
+            display: block;
+            font-family: sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: rgba(0,0,0,0.12);
+            text-transform: uppercase;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .watermark-item span:last-child {
+            font-size: 10px;
+            color: rgba(0,0,0,0.08);
+        }
+
+        /* Запрет выделения текста — всегда, даже в peek-режиме */
+        body > *:not(#pay-lock) {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
+        /* Content blur — через класс на body */
+        body.site-is-locked > *:not(#pay-lock):not(.watermark-overlay):not(#flicker-shield):not(script) {
+            filter: blur(6px);
+            pointer-events: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+
+        /* Payment lock modal */
+        .pay-lock-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 999998;
+            background: rgba(10, 8, 5, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .pay-lock-card {
+            background: linear-gradient(145deg, #1a1508, #2a1f08);
+            border: 1px solid rgba(200,169,126,0.35);
+            border-radius: 20px;
+            padding: 40px 32px 36px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(200,169,126,0.15);
+            animation: lockCardIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes lockCardIn {
+            from { opacity: 0; transform: scale(0.85) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .pay-lock-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #C8A97E, #9D7D43);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(200,169,126,0.3);
+        }
+        .pay-lock-icon svg {
+            color: #fff;
+        }
+        .pay-lock-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #C8A97E;
+            letter-spacing: 0.06em;
+            margin: 0 0 10px;
+        }
+        .pay-lock-sub {
+            font-family: sans-serif;
+            font-size: 13.5px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin: 0 0 28px;
+        }
+        .pay-lock-sub strong {
+            color: rgba(255,255,255,0.9);
+            display: block;
+            margin-top: 6px;
+        }
+        .pay-lock-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,169,126,0.4), transparent);
+            margin: 0 0 24px;
+        }
+        .pay-lock-contact {
+            font-family: sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            margin: 0 0 20px;
+        }
+        .pay-lock-contact a {
+            color: #C8A97E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .pay-lock-peek-btn {
+            background: transparent;
+            border: 1px solid rgba(200,169,126,0.25);
+            border-radius: 10px;
+            color: rgba(255,255,255,0.3);
+            font-family: sans-serif;
+            font-size: 11px;
+            padding: 8px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pay-lock-peek-btn:hover {
+            border-color: rgba(200,169,126,0.5);
+            color: rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body class="is-intro-active">
+
+    <!-- ========== WATERMARK: DEMO / UNPAID ========== -->
+    <div class="watermark-overlay" aria-hidden="true">
+        <div class="watermark-text-grid" id="wm-grid"></div>
+    </div>
+    <script>
+        (function(){
+            var grid = document.getElementById('wm-grid');
+            var count = 80;
+            for(var i = 0; i < count; i++){
+                var el = document.createElement('div');
+                el.className = 'watermark-item';
+                el.innerHTML = '<span>NAMUNA • TO\'LOV KUTILMOQDA</span><span>Demo versiya — To\u02bblov amalga oshirilmagan</span>';
+                grid.appendChild(el);
+            }
+        })();
+    </script>
+
+    <!-- ========== PAYMENT LOCK MODAL ========== -->
+    <div class="pay-lock-backdrop" id="pay-lock">
+        <div class="pay-lock-card">
+            <div class="pay-lock-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h2 class="pay-lock-title">DEMO VERSIYA</h2>
+            <p class="pay-lock-sub">
+                Ushbu sayt hali to'liq faollashtirilmagan.<br>
+                <strong>To'lov amalga oshirilgandan so'ng sayt to'liq ishlaydi.</strong>
+            </p>
+            <div class="pay-lock-divider"></div>
+            <p class="pay-lock-contact">
+                To'liq versiyani olish uchun murojaat qiling:<br>
+                <a href="https://www.instagram.com/wedding_websites_uzbekistan/" target="_blank" rel="noopener noreferrer">
+                    📸 @wedding_websites_uzbekistan
+                </a>
+            </p>
+            <button class="pay-lock-peek-btn" id="pay-peek-btn">
+                Ko'rib chiqish (30 soniya)
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== PAYMENT PROTECTION SCRIPT ========== -->
+    <script>
+    (function() {
+        var lockEl    = document.getElementById('pay-lock');
+        var peekBtn   = document.getElementById('pay-peek-btn');
+        var peekTimer = null;
+        var PEEK_MS   = 30000;   // 30 сек — смотреть
+        var RELOCK_MS = 60000;   // 60 сек — автоблок
+
+        /* ── BLUR через CSS-класс на body (работает на всех детях) ── */
+        function showLock() {
+            clearTimeout(peekTimer);
+            document.body.classList.add('site-is-locked');
+            lockEl.style.display = 'flex';
+        }
+        function hideLock() {
+            document.body.classList.remove('site-is-locked');
+            lockEl.style.display = 'none';
+        }
+        function peek() {
+            hideLock();
+            clearTimeout(peekTimer);
+            peekTimer = setTimeout(showLock, PEEK_MS);
+        }
+
+        /* ── Блок правой кнопки ── */
+        document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+        /* ── Блок горячих клавиш DevTools ── */
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && 'IJC'.includes(e.key)) ||
+                (e.ctrlKey && e.key.toLowerCase() === 'u')) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        /* ── Блок выделения текста и перетаскивания ── */
+        document.addEventListener('selectstart', function(e){
+            if (!e.target.closest('#pay-lock')) e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+        /* ── Блок копирования текста (работает даже в peek-режиме) ── */
+        document.addEventListener('copy',  function(e){ e.preventDefault(); });
+        document.addEventListener('cut',   function(e){ e.preventDefault(); });
+        document.addEventListener('paste', function(e){ e.preventDefault(); });
+
+        /* ── Блок кликов вне модала когда заблокировано ── */
+        document.addEventListener('click', function(e){
+            if (lockEl.style.display !== 'none' && !e.target.closest('#pay-lock')) {
+                e.preventDefault();
+                e.stopPropagation();
+                var card = lockEl.querySelector('.pay-lock-card');
+                card.style.animation = 'none';
+                void card.offsetHeight;
+                card.style.animation = 'lockCardIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both';
+            }
+        }, true);
+
+        peekBtn.addEventListener('click', peek);
+
+        /* ── Авто-блок каждые 60 сек ── */
+        setInterval(showLock, RELOCK_MS);
+
+        /* ══════════════════════════════════════════════════════════
+           ЗАЩИТА ОТ ЗАПИСИ ЭКРАНА — ВСЕГДА АКТИВНА (мобильные тоже)
+        ══════════════════════════════════════════════════════════ */
+
+        /* Слой 1: Белая вспышка */
+        var fLight = document.createElement('div');
+        fLight.style.cssText = 'position:fixed;inset:0;z-index:199997;pointer-events:none;opacity:0;background:#fff;will-change:opacity';
+        document.body.appendChild(fLight);
+
+        /* Слой 2: Чёрная вспышка */
+        var fDark = document.createElement('div');
+        fDark.style.cssText = 'position:fixed;inset:0;z-index:199996;pointer-events:none;opacity:0;background:#000;will-change:opacity';
+        document.body.appendChild(fDark);
+
+        /* rAF-цикл — работает на всех устройствах без событий */
+        var rafFrame = 0;
+        var isLockedState = true;
+
+        function protectionLoop() {
+            rafFrame++;
+
+            if (isLockedState) {
+                /* Агрессивное мерцание когда заблокировано */
+                var t = rafFrame % 4;
+                fLight.style.opacity = (t === 0) ? (Math.random() * 0.5 + 0.3).toFixed(2) : '0';
+                fDark.style.opacity  = (t === 2) ? (Math.random() * 0.5 + 0.3).toFixed(2) : '0';
+            } else {
+                /* Тихий режим просмотра — лёгкое мерцание каждые 6 кадров */
+                var show = (rafFrame % 6 < 1);
+                fLight.style.opacity = show ? '0.04' : '0';
+                fDark.style.opacity  = '0';
+            }
+
+            requestAnimationFrame(protectionLoop);
+        }
+        protectionLoop();
+
+        /* Триггеры блокировки */
+        function onHide() { isLockedState = true;  showLock(); }
+        function onShow() { isLockedState = false; }
+
+        /* visibilitychange — работает и на мобильных */
+        document.addEventListener('visibilitychange', function() {
+            document.hidden ? onHide() : onShow();
+        });
+
+        /* pagehide/pageshow — для мобильных браузеров */
+        window.addEventListener('pagehide', onHide);
+        window.addEventListener('pageshow', onShow);
+
+        /* Потеря фокуса — для десктопа */
+        window.addEventListener('blur',  onHide);
+        window.addEventListener('focus', onShow);
+
+        /* Курсор вышел — десктоп */
+        document.addEventListener('mouseleave', function() { isLockedState = true; });
+        document.addEventListener('mouseenter',  function() { if (!document.hidden) isLockedState = false; });
+
+        /* ── Запуск после полной загрузки DOM ── */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', showLock);
+        } else {
+            showLock();
+        }
+    })();
+    </script>
+
+
+    <!-- ==========================================================================
+         GLOBAL MATERIAL & LIGHTING
+         ========================================================================== -->
+    <div class="canvas-grain-layer" aria-hidden="true"></div>
+    
+    <div class="lighting-system" aria-hidden="true">
+        <div class="spotlight spotlight-top"></div>
+        <div class="spotlight spotlight-center"></div>
+        <div class="spotlight spotlight-bottom"></div>
+    </div>
+
+    <!-- Floating Gold Dust Particles Canvas -->
+    <canvas id="gold-particles-canvas" class="particles-canvas" aria-hidden="true"></canvas>
+
+
+    <!-- ==========================================================================
+         00. CINEMATIC LUXURY OPENING COVER (Interactive Arch Portal Masterpiece)
+         ========================================================================== -->
+    <div class="opening-cover" id="intro-overlay" role="dialog" aria-modal="true" aria-label="Taklifnomani ochish">
+        <div class="cover-portal-stage">
+            <!-- Background Layer: Komron's Portrait inside the Arch Opening -->
+            <div class="cover-portrait-layer" aria-hidden="true">
+                <img src="assets/images/komron_photo.webp" alt="Komron" class="cover-portrait-img" width="1134" height="1387" decoding="async" fetchpriority="high">
+                <div class="cover-portrait-overlay"></div>
+            </div>
+
+            <!-- Foreground Arch Frame Cutout Overlay -->
+            <div class="cover-portal-bg" aria-hidden="true">
+                <img src="assets/images/arch_frame_overlay.webp" alt="" class="portal-bg-img" width="576" height="1024" decoding="async" fetchpriority="high">
+            </div>
+
+            <!-- Symmetrical Hanging Golden Lanterns -->
+            <div class="hanging-lantern lantern-left" aria-hidden="true">
+                <img src="assets/images/gold_lantern.webp" alt="" class="lantern-img" width="1024" height="1536" loading="lazy" decoding="async">
+            </div>
+            <div class="hanging-lantern lantern-right" aria-hidden="true">
+                <img src="assets/images/gold_lantern.webp" alt="" class="lantern-img" width="1024" height="1536" loading="lazy" decoding="async">
+            </div>
+
+            <!-- Foreground Luxury Details (Bottom Left Silk & Bottom Right Gold Dome) -->
+            <div class="cover-foreground-silk" aria-hidden="true">
+                <img src="assets/images/silk_gold_chain.webp" alt="" class="foreground-silk-img" width="2172" height="724" loading="lazy" decoding="async">
+            </div>
+            <div class="cover-foreground-dome" aria-hidden="true">
+                <img src="assets/images/gold_dome.webp" alt="" class="foreground-dome-img" width="1774" height="887" loading="lazy" decoding="async">
+            </div>
+
+            <!-- Central Invitation Composition with Luxury Hierarchy -->
+            <div class="cover-center-composition">
+
+                <!-- Invitation Body Text -->
+                <div class="cover-invitation-body">
+                    <h2 class="cover-azizlar">AZIZLAR!</h2>
+                    <div class="cover-intro-text">
+                        <p>Sizlarni farzandimizning</p>
+                        <p class="highlight-event"><strong>SUNNAT TO‘YI</strong> munosabati</p>
+                        <p>bilan bo‘lib o‘tadigan</p>
+                        <p>quvonchli tadbirimizga</p>
+                        <p>taklif etamiz!</p>
+                    </div>
+                </div>
+                
+                <!-- Dominant Hero Centerpiece: Komron & Venue -->
+                <div class="cover-name-wrapper">
+                    <h1 class="cover-name">Komron</h1>
+                    <div class="cover-title-row">
+                        <span class="cover-ceremony-type">Gurtepa, Oqsaroy to‘yxonasi</span>
+                    </div>
+                    
+                    <div class="cover-filigree-divider" aria-hidden="true">
+                        <span class="f-line"></span>
+                        <img src="assets/images/gold_diamond_medallion.webp" alt="" class="diamond-medallion-img" width="1293" height="1217" loading="lazy" decoding="async">
+                        <span class="f-line"></span>
+                    </div>
+
+                    <p class="cover-slogan">SIZNI KUTIB QOLAMIZ!</p>
+                </div>
+
+                <!-- Physical Invitation Seal Action Button (Stationery Gold Pill) -->
+                <div class="seal-btn-holder">
+                    <button type="button" class="btn-seal-open" id="btn-open-invitation" aria-label="Taklifnomani ochish">
+                        <span class="seal-btn-shimmer" aria-hidden="true"></span>
+                        <span class="seal-btn-text">Taklifnomani ochish</span>
+                        <span class="seal-btn-icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+         FLOATING AMBIENT AUDIO EQUALIZER CONTROLLER
+         ========================================================================== -->
+    <aside class="ambient-audio-pill" id="audio-control-wrap" aria-label="Musiqa sozlamasi">
+        <button type="button" class="btn-audio-pill" id="btn-audio-toggle" aria-pressed="false" aria-label="Musiqani yoqish yoki o‘chirish">
+            <span class="audio-icon-wrap">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+            </span>
+            <span class="audio-waves" aria-hidden="true">
+                <span class="wave-bar bar-1"></span>
+                <span class="wave-bar bar-2"></span>
+                <span class="wave-bar bar-3"></span>
+                <span class="wave-bar bar-4"></span>
+            </span>
+        </button>
+    </aside>
+
+
+    <!-- ==========================================================================
+         MAIN CINEMATIC INVITATION JOURNEY (Adapted from Folder 4 in Luxury Palette)
+         ========================================================================== -->
+    <main class="cinematic-journey" id="invitation-main">
+
+        <!-- ======================================================================
+             SECTION 1: TAKLIFNOMA (MUBORAK TAKLIFNOMA)
+             ====================================================================== -->
+        <section id="taklif-section" class="scene content-section taklif-card" aria-label="Muborak Taklifnoma">
+            <div class="scene-container">
+                <div class="section-top-ornament-wrap" aria-hidden="true">
+                    <img src="assets/images/arch_ornament.webp" alt="" class="section-top-ornament" width="600" height="249" loading="lazy" decoding="async">
+                </div>
+                <div class="section-badge">Muborak Taklifnoma</div>
+                <p class="taklif-arabic-title" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                
+                <h2 class="section-title">Hurmatli Mehmonimiz!</h2>
+                
+                <div class="section-divider-wrap" aria-hidden="true">
+                    <img src="assets/images/divider_ornament.webp" alt="" class="section-divider-ornament" width="600" height="200" loading="lazy" decoding="async">
+                </div>
+
+                <div class="taklif-text-container">
+                    <p class="taklif-text">
+                        Sizni va oilangizni jondan aziz farzandimiz <span class="taklif-highlight">Komron</span>ning Sunnat to‘yi munosabati bilan yoziladigan fayzli va to‘kin dasturxonimizga lutfan taklif etamiz.
+                    </p>
+
+                    <p class="taklif-text">
+                        Ushbu quvonchli va shukuhli kunimizda davramiz fayzi, to‘rimiz ko‘rki bo‘lishingiz biz uchun cheksiz sharafdir.
+                    </p>
+                </div>
+
+                <div class="taklif-signature">
+                    <p class="taklif-signature-title">Cheksiz ehtirom va samimiyat ila:</p>
+                    <p class="taklif-signature-name">Komronning ota-onasi va barcha oila a'zolari</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 3: TADBIR HAQIDA & VAQTI (DUAL CEREMONIES & COUNTDOWN)
+             ====================================================================== -->
+        <section id="details-section" class="scene content-section" aria-label="Tadbir Tafsilotlari">
+            <div class="scene-container">
+                <div class="section-badge">Tantana Vaqti</div>
+                <h2 class="section-title">Tadbir Haqida</h2>
+
+                <div class="section-divider-wrap" aria-hidden="true">
+                    <img src="assets/images/divider_ornament.webp" alt="" class="section-divider-ornament" width="600" height="200" loading="lazy" decoding="async">
+                </div>
+
+                <!-- Event Date Pill -->
+                <div class="event-date-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>2026-YIL 8-SENTABR, SESHANBA</span>
+                </div>
+
+                <!-- Dual Event Ceremonies Grid -->
+                <div class="event-cards-grid">
+                    
+                    <!-- 1. Nahor Oshi -->
+                    <div class="event-subcard">
+                        <div class="event-subcard-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </div>
+                        <div class="event-subcard-info">
+                            <p class="event-subcard-tag">Ertalabki Marosim</p>
+                            <h3 class="event-subcard-name">Nahor Oshi</h3>
+                            <p class="event-subcard-time">⏰ 07:00 – 09:00</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Mehmonlarni Kutib Olish -->
+                    <div class="event-subcard">
+                        <div class="event-subcard-icon">
+                            <!-- Minimal sunrise icon for the 08:00 morning event -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 18h16"></path>
+                                <path d="M7 18a5 5 0 0 1 10 0"></path>
+                                <path d="M12 3v3"></path>
+                                <path d="M5.64 6.64l2.12 2.12"></path>
+                                <path d="M18.36 6.64l-2.12 2.12"></path>
+                                <path d="M3 11h3"></path>
+                                <path d="M18 11h3"></path>
+                            </svg>
+                        </div>
+                        <div class="event-subcard-info">
+                            <p class="event-subcard-tag">Mehmonlarni Kutib Olish</p>
+                            <h3 class="event-subcard-name">To‘y Tantanasi</h3>
+                            <p class="event-subcard-time">☀ 08:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Countdown Timer -->
+                <div class="countdown-container">
+                    <p class="countdown-title">Tantanagacha qolgan vaqt:</p>
+                    <div class="countdown-grid" id="countdown">
+                        <div class="countdown-item">
+                            <div class="countdown-box">
+                                <span id="countdown-days" class="countdown-num">00</span>
+                            </div>
+                            <span class="countdown-label">Kun</span>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-box">
+                                <span id="countdown-hours" class="countdown-num">00</span>
+                            </div>
+                            <span class="countdown-label">Soat</span>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-box">
+                                <span id="countdown-minutes" class="countdown-num">00</span>
+                            </div>
+                            <span class="countdown-label">Daqiqa</span>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-box">
+                                <span id="countdown-seconds" class="countdown-num">00</span>
+                            </div>
+                            <span class="countdown-label">Soniya</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add to Calendar Action -->
+                <div class="calendar-btn-wrap">
+                    <button id="add-calendar-btn" class="btn-secondary" type="button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span>Taqvimga Qo‘shish</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 4: KUN TARTIBI (EVENT TIMELINE)
+             ====================================================================== -->
+        <section id="schedule-section" class="scene content-section" aria-label="Kun Tartibi">
+            <div class="scene-container">
+                <div class="section-badge">Reja va Dastur</div>
+                <h2 class="section-title">Kun Tartibi</h2>
+
+                <div class="section-divider-wrap" aria-hidden="true">
+                    <img src="assets/images/divider_ornament.webp" alt="" class="section-divider-ornament" width="600" height="200" loading="lazy" decoding="async">
+                </div>
+
+                <div class="timeline-list">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="timeline-time">07:00 – 09:00</p>
+                        <h3 class="timeline-title">Nahor Oshi</h3>
+                        <p class="timeline-desc">Ertalabki an'anaviy to‘y oshi va duolar</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="timeline-time">08:00</p>
+                        <h3 class="timeline-title">Mehmonlarni Kutib Olish</h3>
+                        <p class="timeline-desc">Qizil yo‘lak va bayramona fotosessiya</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="timeline-time">08:00</p>
+                        <h3 class="timeline-title">Tantanali Ochilish</h3>
+                        <p class="timeline-desc">Qur'oni Karim tilovati va oq fotiha</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="timeline-time">08:00</p>
+                        <h3 class="timeline-title">Bayramona Shoudastur</h3>
+                        <p class="timeline-desc">San'atkorlar chiqishlari va shohona dasturxon</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <p class="timeline-time">08:00</p>
+                        <h3 class="timeline-title">Minnatdorchilik & Duo</h3>
+                        <p class="timeline-desc">Esdalik sovg‘alari va ezgu tilaklar</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- ======================================================================
+             SECTION 6: MANZIL & XARITA (LOCATION & INTERACTIVE NAVIGATION)
+             ====================================================================== -->
+        <section id="location-section" class="scene content-section" aria-label="Manzil va Xarita">
+            <div class="scene-container">
+                <div class="section-badge">To‘y Manzili</div>
+                <h2 class="section-title">Manzil</h2>
+
+                <div class="section-divider-wrap" aria-hidden="true">
+                    <img src="assets/images/divider_ornament.webp" alt="" class="section-divider-ornament" width="600" height="200" loading="lazy" decoding="async">
+                </div>
+
+                <div class="venue-details">
+                    <h3 class="venue-name">G‘urtepa, "Oqsaroy" to‘yxonasi</h3>
+                    <p class="venue-address">G‘urtepa hududi, "Oqsaroy" tantanalar maskani</p>
+                    <p class="venue-landmark">Mo‘ljal: G‘urtepa markazi, asosiy yo‘l bo‘yida</p>
+                </div>
+
+                <!-- Interactive Styled Map Embed -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Oq+saroy+to%27yxonasi%2C+Gurumsaray%2C+Namangan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        width="600"
+                        height="400"
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="To'yxona Xaritasi">
+                    </iframe>
+                </div>
+
+                <!-- Navigation Action Buttons Grid -->
+                <div class="nav-buttons-grid">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Oq+saroy+to%27yxonasi%2C+Gurumsaray%2C+Namangan&query_place_id=ChIJu789ZfrPujgRfmHH7uyHL0Y" target="_blank" rel="noopener noreferrer" class="nav-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                        <span>Google Xarita</span>
+                    </a>
+
+                    <button id="copy-address-btn" type="button" class="nav-btn nav-btn-copy">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                        </svg>
+                        <span>Manzilni Nusxalash</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 7: RSVP (TASHRIFNI TASDIQLASH)
+             ====================================================================== -->
+        <section id="rsvp-section" class="scene content-section rsvp-card" aria-label="Tashrifni Tasdiqlash">
+            <div class="scene-container">
+                <div class="section-top-ornament-wrap" aria-hidden="true">
+                    <img src="assets/images/arch_ornament.webp" alt="" class="section-top-ornament" width="600" height="249" loading="lazy" decoding="async">
+                </div>
+                <div class="section-badge">Hurmatli Mehmon</div>
+                <h2 class="section-title">Tashrifingizni Tasdiqlang</h2>
+
+                <div class="section-divider-wrap" aria-hidden="true">
+                    <img src="assets/images/divider_ornament.webp" alt="" class="section-divider-ornament" width="600" height="200" loading="lazy" decoding="async">
+                </div>
+
+                <p class="rsvp-intro-text">
+                    To‘kin dasturxonimizda siz azizlar uchun qulay joy hozirlashimiz maqsadida tashrifingizni tasdiqlashingizni iltimos qilamiz:
+                </p>
+
+                <form id="rsvp-form" class="rsvp-form">
+                    
+                    <div class="form-group">
+                        <label for="rsvp-name" class="form-label">Ismingiz va Familiyangiz *</label>
+                        <input type="text" id="rsvp-name" class="form-input" placeholder="Masalan: Azizbek Karimov" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rsvp-phone" class="form-label">Telefon Raqamingiz *</label>
+                        <input type="tel" id="rsvp-phone" class="form-input" placeholder="+998 (__) ___-__-__" required>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="form-label">Tashrifingiz Holati:</span>
+                        <div class="radio-options-grid">
+                            <div class="radio-option-card">
+                                <input type="radio" id="attend-yes" name="attendance" value="Boraman" checked>
+                                <label for="attend-yes" class="radio-label">
+                                    <span>🌟 Albatta boraman</span>
+                                </label>
+                            </div>
+                            <div class="radio-option-card">
+                                <input type="radio" id="attend-no" name="attendance" value="Bora olmayman">
+                                <label for="attend-no" class="radio-label">
+                                    <span>🕊️ Afsuski, yo‘q</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="form-label">Mehmonlar Soni:</span>
+                        <div class="guest-pills-grid">
+                            <div class="guest-pill-card">
+                                <input type="radio" id="guests-1" name="guest_count" value="1" checked>
+                                <label for="guests-1" class="guest-pill-label">1 kishi</label>
+                            </div>
+                            <div class="guest-pill-card">
+                                <input type="radio" id="guests-2" name="guest_count" value="2">
+                                <label for="guests-2" class="guest-pill-label">2 kishi</label>
+                            </div>
+                            <div class="guest-pill-card">
+                                <input type="radio" id="guests-family" name="guest_count" value="Oila bilan">
+                                <label for="guests-family" class="guest-pill-label">Oila bilan</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rsvp-wishes" class="form-label">Ezgu Tilaklaringiz (Ixtiyoriy)</label>
+                        <textarea id="rsvp-wishes" class="form-textarea" placeholder="Komronga ezgu tilaklar va duolaringiz..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>TASDIQLASH</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 8: YAKUN / XOTIMA (FINAL BLESSING)
+             ====================================================================== -->
+        <section id="yakun-section" class="scene yakun-section" aria-label="Xotima">
+            <div class="scene-container">
+                <div class="finale-royal-medallion" aria-hidden="true">
+                    <img src="assets/images/gold_crest.webp" alt="" class="finale-crest-img" width="1199" height="1312" loading="lazy" decoding="async">
+                </div>
+                
+                <p class="yakun-tagline">Tashrifingizdan mamnun bo‘lamiz!</p>
+                <h2 class="yakun-main-title">SIZNI KUTIB QOLAMIZ!</h2>
+                <h3 class="yakun-child-name">KOMRON</h3>
+
+                <p class="yakun-blessing">
+                    «Yaxshi duolaringiz, ezgu tilaklaringiz biz uchun eng katta hadya!»
+                </p>
+
+                <div class="editorial-filigree-divider" aria-hidden="true">
+                    <span class="f-line"></span>
+                    <span class="f-diamond">◈</span>
+                    <span class="f-line"></span>
+                </div>
+
+                <div class="finale-family-signature">
+                    <span class="signature-intro-label">HURMAT BILAN:</span>
+                    <p class="signature-family-name">Komronning ota-onasi</p>
+                </div>
+
+                <div class="finale-subtle-bismillah">
+                    <p lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                </div>
+
+                <!-- Return to Top Button -->
+                <div class="finale-top-action">
+                    <button type="button" class="btn-back-to-crest" id="btn-to-top" aria-label="Taklifnoma boshiga qaytish">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="footer-credits">
+                    © 2026 Sunnat To‘yi • Barcha huquqlar himoyalangan
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================================================
+         VIP CONFIRMATION PASS MODAL
+         ========================================================================== -->
+    <div id="vip-modal" class="vip-modal" role="dialog" aria-modal="true" aria-label="VIP Taklifnoma Chiptasi" hidden>
+        <div class="vip-backdrop"></div>
+        <div class="vip-card">
+            <div class="vip-badge-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </div>
+
+            <h3 class="vip-title">Tashrif Tasdiqlandi</h3>
+            <p class="vip-subtitle">Sizni bayramimizda kutib qolamiz!</p>
+
+            <div class="vip-details-box">
+                <p id="vip-card-name" class="vip-guest-name">Aziz Mehmon</p>
+                <p id="vip-card-status" class="vip-guest-status">✨ Tashrif tasdiqlandi (1 kishi)</p>
+                <p class="vip-venue-info">📍 Oq saroy to‘yxonasi, Gurumsaray, Namangan • 8-Sentabr, 2026</p>
+            </div>
+
+            <div class="vip-actions">
+                <a id="vip-telegram-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-submit btn-telegram-share">
+                    <span>Telegram orqali yuborish</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                </a>
+                <button id="vip-modal-close" class="btn-secondary btn-vip-close" type="button">
+                    <span>Yopish</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Golden Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Global Toast Notification -->
+    <div id="global-toast" class="toast-msg"></div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="js/main.js" defer></script>
+    <audio id="wedding-music" loop preload="none">
+        <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>
